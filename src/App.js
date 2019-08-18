@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Person from './Components/Person';
+
 
 import UserInput from './Components/UserInput';
 import UserOutput from './Components/UserOutput';
@@ -22,7 +21,7 @@ class App extends Component {
   render(){
   return(
     <div>
-      <h1>Tarea 1</h1>
+      <h1>homework 1</h1>
       <UserInput dataUser={this.state.dataUser[0].username}
       click={this.userNameChangeHandler.bind(this)}
       changed={this.userNameChangeHandler}
@@ -34,7 +33,10 @@ class App extends Component {
 }
   export default App;
 
- /* state = {
+ /*
+ import Person from './Components/Person';
+ 
+ state = {
     persons: [
       {name: 'lore', hobby:'leer'},
       {name: 'Raul', hobby:'dormir'},
