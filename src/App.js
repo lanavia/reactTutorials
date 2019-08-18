@@ -1,52 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
-import UserInput from './Components/UserInput';
-import UserOutput from './Components/UserOutput';
+import Person from './Components/Person';
 
 class App extends Component {
-  state = {
-    dataUser: [
-      {username:'lore'}
-    ]
-  }
-  userNameChangeHandler = (event)=>{
-    this.setState ({
-      dataUser: [
-        {username:event.target.value}
-      ]
-    })
-  }
-  render(){
-  return(
-    <div>
-      <h1>homework 1</h1>
-      <UserInput dataUser={this.state.dataUser[0].username}
-      click={this.userNameChangeHandler.bind(this)}
-      changed={this.userNameChangeHandler}
-      />
-      <UserOutput username={this.state.dataUser[0].username}/>
-    </div>
-  );
-  }
-}
-  export default App;
-
- /*
- import Person from './Components/Person';
- 
- state = {
+state = {
     persons: [
-      {name: 'lore', hobby:'leer'},
-      {name: 'Raul', hobby:'dormir'},
-      {name:'Soledad', hobby:'be mom'}
-    ]
+      {id:'1160', name: 'lore', hobby:'leer'},
+      {id:'1161', name: 'Raul', hobby:'dormir'},
+      {id:'1162', name:'Soledad', hobby:'be mom'}
+    ],
+    otherState: 'some other something',
+    showPersons: false
   }
   switchHandler = () =>{
     console.log('was clicked!');
   }
-  nameChangeHandler = (event)=>{
+  nameChangeHandler = (event, id)=>{
+    const personIndex = this.state.persons.findIndex(p=>{ return p.id==id;});
+
     this.setState ({
       persons : [
         {name: 'Camila', hobby:'travel'},
@@ -56,6 +28,24 @@ class App extends Component {
     })
   }
 
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons:!doesShow});
+    console.log(' showPerson value :',this.state.showPersons);
+  }
+
+  deletePersonHandler = (personIndex) => {
+    console.log('was clicked deletePersonHandler!');
+    //const persons = this.state.persons.slice();
+    //usando spreads
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
+  }
+
+  countLengthTextHandler = (event)=>{
+    console.log('countLengthTextHandler' + event.target.value)
+  }
 
   render() {
     const style = {
@@ -65,29 +55,41 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     };
+
+
+    let persons = null;
+    if(this.state.showPersons){
+      persons = (
+        <div>
+
+          {this.state.persons.map((person, index) =>{
+            return <Person  click={()=>this.deletePersonHandler(index)}
+                            name={person.name} 
+                            hobby={person.hobby}
+                            key={person.id} />
+          })}
+          
+        
+          <Person />
+        </div>
+      )
+    }
     return (
       <div className="App">
         <h1>bienvenida</h1>
        
         <button 
           style={style}
-          onClick={this.switchHandler}>Click</button>
-        <Person name={this.state.persons[0].name} 
-            hobby={this.state.persons[0].hobby} />
-        <Person name={this.state.persons[1].name} 
-            hobby={this.state.persons[1].hobby}/>
-        <Person>My favorit color is : red</Person> 
-        <Person name={this.state.persons[2].name} 
-            hobby={this.state.persons[2].hobby}
-            click={this.switchHandler.bind(this, 'Luciano')}
-            changed={this.nameChangeHandler}
-           />
-        
-        <Person />
+          onClick={this.togglePersonHandler}>Click</button>
+        {persons}
+        <br/>
+        <input type="text" value="algo a escribir" onChange={this.countLengthTextHandler}/>
+        <p>length of text</p>
       </div>
     );
   }
 }
-*/
+export default App;
 
+ 
 

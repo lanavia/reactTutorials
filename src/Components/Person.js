@@ -6,7 +6,7 @@ const  person =(props) => {
 //now we are test the received information inside the tag
 return (
     <div className="Person">
-        <p>I'm {props.name} and my hobby is {props.hobby}</p>
+        <p onClick={props.click}>I'm {props.name} and my hobby is {props.hobby}</p>
         <p>{props.children}</p>
         <input type="text" 
         
