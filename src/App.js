@@ -2,31 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-import UserInput from './Components/UserInput';
-import UserOutput from './Components/UserOutput';
+import ValidationComponent from './Components/ValidationComponent';
+import CharComponent from './Components/CharComponent';
 
+ 
 class App extends Component {
   state = {
-    dataUser: [
-      {username:'lore'}
-    ]
+    paragraph:'length of text',
+    text: 'type a text' ,
+    lengthOfText: 0
   }
-  userNameChangeHandler = (event)=>{
+  textChangeHandler = (event)=>{
     this.setState ({
-      dataUser: [
-        {username:event.target.value}
-      ]
+      text: event.target.value
+      
     })
   }
   render(){
   return(
     <div>
-      <h1>homework 1</h1>
-      <UserInput dataUser={this.state.dataUser[0].username}
-      click={this.userNameChangeHandler.bind(this)}
-      changed={this.userNameChangeHandler}
+      <h1>homework 2</h1>
+      <input type="text"
+          value={this.state.text}
+          onChange={this.textChangeHandler}
       />
-      <UserOutput username={this.state.dataUser[0].username}/>
+      <p>{this.state.text}</p>
     </div>
   );
   }
